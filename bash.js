@@ -3,6 +3,10 @@ const ls = require("./ls");
 const cat = require("./cat");
 const curl = require("./curl");
 
+const done = output => {
+  process.stdout.write(output);
+  process.stdout.write("\nprompt > ");
+};
 process.stdout.write("prompt >");
 
 process.stdin.on("data", data => {
@@ -12,18 +16,14 @@ process.stdin.on("data", data => {
     .split(" ");
 
   if (cmd[0] === "pwd") {
-    pwd(__dirname);
+    pwd(__dirname, done);
   } else if (cmd[0] === "ls") {
-    ls();
+    ls(done);
   } else if (cmd[0] === "cat") {
-    cat(cmd[1]);
+    cat(cmd[1], done);
   } else if (cmd[0] === "curl") {
-    curl(cmd[1]);
+    curl(cmd[1], done);
   } else {
-    process.stdout.write("You typed: " + cmd);
+    done("You typed: " + cmd);
   }
-
-  setTimeout(() => {
-    process.stdout.write("\nprompt > ");
-  }, 5);
 });

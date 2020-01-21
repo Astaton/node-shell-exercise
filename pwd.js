@@ -1,1 +1,1 @@
-module.exports = dir => console.log(dir);
+module.exports = (dir, done) => done(dir);

@@ -1,11 +1,11 @@
-const fs = require('fs');
+const fs = require("fs");
 
-module.exports = function() {
-  fs.readdir('./', 'utf8', (err, files) => {
+module.exports = function(done) {
+  fs.readdir("./", "utf8", (err, files) => {
     if (err) {
-      throw err
+      throw err;
     } else {
-      process.stdout.write(files.join('\n'));
+      done(files.join("\n"));
     }
-  })
-}
+  });
+};
