@@ -3,6 +3,7 @@ const ls = require("./ls");
 const cat = require("./cat");
 const curl = require("./curl");
 const echo = require("./echo");
+const date = require("./date");
 
 const done = output => {
   process.stdout.write(output);
@@ -26,6 +27,8 @@ process.stdin.on("data", data => {
     curl(cmd[1], done);
   } else if (cmd[0] === "echo") {
     echo(cmd.slice(1, cmd.length).join(" "), done);
+  } else if (cmd[0] === "date") {
+    date(done);
   } else {
     done("You typed: " + cmd);
   }
